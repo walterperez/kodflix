@@ -18,11 +18,12 @@
 .flex-element {
   flex:1;
   position: relative;
+  overflow: hidden;
 }
 .flex-element:hover .box {
   opacity: 0.88;
   bottom: 0;
-  overflow: hidden;
+  
 }
 .flex-element:hover .box h1 {
   color: rgb(255, 230, 0);
