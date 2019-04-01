@@ -16,24 +16,42 @@ class App extends Component {
       <div className="container">
         <div className="flex-cointainer">
           <div className="flex-element">
-          <img src={LordOfTheRigns1Cover} alt="Lord Of The Rigns 1 Cover"/>
+            <img src={LordOfTheRigns1Cover} alt="Lord Of The Rigns 1 Cover" />
+            <div className="box">
+              <h1>Lord Of The Rings</h1>
+            </div>
           </div>
           <div className="flex-element">
-          <img src={BatmanCover} alt="Batman Cover"/>
+            <img src={BatmanCover} alt="Batman Cover" />
+            <div className="box">
+              <h1>Batman</h1>
+            </div>
           </div>
           <div className="flex-element">
-          <img src={SlendermanCover} alt="Slenderman Cover"/>
+            <img src={SlendermanCover} alt="Slenderman Cover" />
+            <div className="box">
+              <h1>Slenderman</h1>
+            </div>
           </div>
         </div>
         <div className="flex-cointainer">
           <div className="flex-element">
-          <img src={SpidermanCover} alt="Spiderman Cover"/>
+            <img src={SpidermanCover} alt="Spiderman Cover" />
+            <div className="box">
+              <h1>Spiderman</h1>
+            </div>
           </div>
           <div className="flex-element">
-          <img src={StarTreckDiscoveryCover} alt="Star Treck Discovery Cover"/>
+            <img src={StarTreckDiscoveryCover} alt="Star Treck Discovery Cover" />
+            <div className="box">
+              <h1>Star Treck Discovery</h1>
+            </div>
           </div>
           <div className="flex-element">
-          <img src={StarWarsCover} alt="Star Wars Cover"/>
+            <img src={StarWarsCover} alt="Star Wars Cover" />
+            <div className="box">
+              <h1>Star Wars</h1>
+            </div>
           </div>
         </div>
       </div>
