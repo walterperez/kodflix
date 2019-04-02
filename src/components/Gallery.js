@@ -16,8 +16,6 @@ export default function Gallery(props) {
         <Movie name={"Lord Of The Rigns"} cover={LordOfTheRigns1Cover} />
         <Movie name={"Batman"} cover={BatmanCover} />
         <Movie name={"Slenderman"} cover={SlendermanCover} />
-      </div>
-      <div className="flex-container">
         <Movie name={"Spiderman"} cover={SpidermanCover} />
         <Movie name={"Star Treck Discovery"} cover={StarTreckDiscoveryCover} />
         <Movie name={"StarWars"} cover={StarWarsCover} />

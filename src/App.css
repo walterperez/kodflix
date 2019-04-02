@@ -7,18 +7,18 @@
   height: auto;
 }
 
-.container {
-  width: 100%;
-}
-
 .flex-container {
-  display: flex;
+  display: grid;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 0.5fr));
 }
 
 .flex-element {
   flex:1;
   position: relative;
   overflow: hidden;
+  object-fit: cover;
 }
 .flex-element:hover .box {
   opacity: 0.88;
@@ -58,12 +58,15 @@ img {
   height: 100%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 516px) {
   .flex-container {
     /* display: block; */
-    flex-direction: column;
+    /* flex-direction: column; */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 }
+
+
 
 
 
