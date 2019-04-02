@@ -11,9 +11,9 @@ export default class Gallery extends Component {
   }
 
   handleMoviesListMapping() {
-    return moviesList.map(movie => {
+    return moviesList.map((movie, index) => {
       return (
-        <Movie
+        <Movie key={index}
           name={movie.movieName}
           cover={movie.movieCover}
           id={movie.movieID}
