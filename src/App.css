@@ -20,11 +20,12 @@
   overflow: hidden;
   object-fit: cover;
 }
+
 .flex-element:hover .box {
   opacity: 0.88;
-  bottom: 0;
-  
+  bottom: 0; 
 }
+
 .flex-element:hover .box h1 {
   color: rgb(255, 230, 0);
 }
@@ -42,7 +43,8 @@
   left: 0;
   right: 0;
   transition: bottom cubic-bezier(0.06, 0.53, 0.56, 1.92) 0.5s;
-  
+  margin: 0;
+  padding: 0;
 }
 
 .box .movie-title {

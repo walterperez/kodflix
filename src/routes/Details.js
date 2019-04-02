@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import moviesList from "./../components/MoviesDB";
-export default class Details extends Component {
+class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,8 +23,9 @@ export default class Details extends Component {
         message:movie.movieName,
         movieID:movie.movieID
       })
+    } else {
+      this.props.history.push('/NotFound')
     }
-
   }
 
   render() {
@@ -39,3 +40,5 @@ export default class Details extends Component {
     );
   }
 }
+
+export default withRouter(Details);
