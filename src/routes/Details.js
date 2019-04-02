@@ -5,8 +5,10 @@ class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: "",
-      movieID: ""
+      movieID: "",
+      movieName:"",
+      movieDescription:"",
+      movieCover:""
     };
   }
 
@@ -20,8 +22,10 @@ class Details extends Component {
 
     if (movie) {
       this.setState({
-        message:movie.movieName,
-        movieID:movie.movieID
+        movieName : movie.movieName,
+        movieID : movie.movieID,
+        movieDescription : movie.movieDescription,
+        movieCover : movie.movieCover
       })
     } else {
       this.props.history.push('/NotFound')
@@ -30,12 +34,15 @@ class Details extends Component {
 
   render() {
     return (
-      <div>
-        <h1>
-          {this.state.message}
-          {/* {this.props.match.params.idMovie.split("-").join(" ")} */}
-        </h1>
-        <Link to="/">Home</Link>
+      <div id="Details">
+        <h1 className="movie-title">{this.state.movieName}</h1>
+        <div className="details-container">
+          <p className="desription">{this.state.movieDescription}
+          <br /><br />
+          <span className="Link"><Link to="/">Home</Link></span>
+          </p>
+          <img className="movie-cover" src={this.state.movieCover} alt={this.state.movieName}/>
+        </div>
       </div>
     );
   }
