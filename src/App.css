@@ -11,7 +11,7 @@
   display: grid;
   /* flex-direction: row; */
   flex-wrap: wrap;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 0.5fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .flex-element {

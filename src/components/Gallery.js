@@ -1,25 +1,32 @@
-import React from "react";
+import React, { Component } from "react";
 //Components
 import Movie from "./Movie";
-//Covers
-import LordOfTheRigns1Cover from "./../img/LordOfTheRigns1Cover.jpg";
-import BatmanCover from "./../img/BatmanCover.jpg";
-import SlendermanCover from "./../img/SlendermanCover.jpg";
-import SpidermanCover from "./../img/SpidermanCover.jpg";
-import StarTreckDiscoveryCover from "./../img/StarTreckDiscoveryCover.jpg";
-import StarWarsCover from "./../img/StarWarsCover.jpg";
+import moviesList from "./MoviesDB";
 
-export default function Gallery(props) {
-  return (
-    <div>
-      <div className="flex-container">
-        <Movie name={"Lord Of The Rigns"} cover={LordOfTheRigns1Cover} />
-        <Movie name={"Batman"} cover={BatmanCover} />
-        <Movie name={"Slenderman"} cover={SlendermanCover} />
-        <Movie name={"Spiderman"} cover={SpidermanCover} />
-        <Movie name={"Star Treck Discovery"} cover={StarTreckDiscoveryCover} />
-        <Movie name={"StarWars"} cover={StarWarsCover} />
+export default class Gallery extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleMoviesListMapping = this.handleMoviesListMapping.bind(this);
+  }
+
+  handleMoviesListMapping() {
+    return moviesList.map(movie => {
+      return (
+        <Movie
+          name={movie.movieName}
+          cover={movie.movieCover}
+          id={movie.movieID}
+        />
+      );
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="flex-container">{this.handleMoviesListMapping()}</div>
       </div>
-    </div>
-  );
+    );
+  }
 }

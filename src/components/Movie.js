@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Movie(props) {
   return (
     <div className="flex-element">
-      <Link to={props.name.split(" ").join("-")}>
+      <Link to={props.id}>
         <img src={props.cover} alt={`${props.name} Cover`} />
       </Link>
       <div className="box">
