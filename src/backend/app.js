@@ -4,7 +4,6 @@ const movies = require("./moviesDB");
 const path = require("path");
 
 //Settings
-// const port = process.env.PORT || 3001;
 const port = process.env.PORT || 3001;
 
 //Static

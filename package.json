@@ -14,8 +14,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-server": "nodemon ./src/backend/app.js",
-    "start-dev": "npm-run-all -p start-server start-frontend"
+    "start": "nodemon ./src/backend/app.js",
+    "start-dev": "npm-run-all -p start-server start"
   },
   "eslintConfig": {
     "extends": "react-app"
