@@ -4,7 +4,8 @@ const movies = require("./moviesDB");
 const path = require("path");
 
 //Settings
-app.set("PORT", process.env.PORT || 3001);
+// const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 //Static
 app.use(express.static(path.join(__dirname, "./../../build")));
@@ -19,6 +20,6 @@ app.get("/rest/shows", (req,res) => {
 });
 
 //Server Run
-app.listen(app.get("PORT"), ()=>{
-    console.log(`Server running on port: ${app.get("PORT")}`);
+app.listen(port, ()=>{
+    console.log(`Server running on port: ${port}`);
 });
