@@ -10,6 +10,15 @@ export default class Gallery extends Component {
     this.handleMoviesListMapping = this.handleMoviesListMapping.bind(this);
   }
 
+  componentWillMount(){
+    let server = "/rest/shows";
+    fetch(server)
+    .then(data => data.json())
+    .then(json => {
+      console.log(json)
+    })
+    }
+
   handleMoviesListMapping() {
     return moviesList.map((movie, index) => {
       return (
