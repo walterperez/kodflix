@@ -8,6 +8,7 @@ export default class Gallery extends Component {
     super(props);
     this.state = {};
     this.handleMoviesListMapping = this.handleMoviesListMapping.bind(this);
+    this.thing = [];
   }
 
   componentWillMount(){
@@ -29,6 +30,17 @@ export default class Gallery extends Component {
         />
       );
     });
+  }
+
+  componentDidMount() {
+    const server = "/rest/shows";
+    fetch(server)
+      .then(data => {
+        return data.json();
+      })
+      .then(json => {
+        console.log(json);
+      })
   }
 
   render() {
