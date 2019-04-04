@@ -10,12 +10,12 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-frontend": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-server": "nodemon ./src/backend/app.js",
-    "all": "npm-run-all -p start-server start"
+    "start-dev": "npm-run-all -p start-server start-frontend"
   },
   "eslintConfig": {
     "extends": "react-app"

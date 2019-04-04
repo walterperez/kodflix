@@ -11,6 +11,15 @@ export default class Gallery extends Component {
     this.thing = [];
   }
 
+  componentWillMount(){
+    let server = "/rest/shows";
+    fetch(server)
+    .then(data => data.json())
+    .then(json => {
+      console.log(json)
+    })
+    }
+
   handleMoviesListMapping() {
     return moviesList.map((movie, index) => {
       return (
