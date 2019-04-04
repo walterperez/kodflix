@@ -19,6 +19,6 @@ app.get("/rest/shows", (req,res) => {
 });
 
 //Server Run
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
 });
