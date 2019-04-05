@@ -8,9 +8,7 @@ import NotFound from "./routes/NotFound";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      urlNotExist: false
-    };
+    this.state = {};
   }
 
   render() {

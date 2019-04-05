@@ -1,53 +1,51 @@
 import React, { Component } from "react";
 //Components
 import Movie from "./Movie";
-import moviesList from "./MoviesDB";
 
 export default class Gallery extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      movies: []
+    };
     this.handleMoviesListMapping = this.handleMoviesListMapping.bind(this);
-    this.thing = [];
   }
 
-  componentWillMount(){
+  componentWillMount() {
     let server = "/rest/shows";
     fetch(server)
-    .then(data => data.json())
-    .then(json => {
-      console.log(json)
-    })
-    }
+      .then(data => data.json())
+      .then(json => {
+        this.setState(
+          {
+            movies: json
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
+      });
+  }
 
   handleMoviesListMapping() {
-    return moviesList.map((movie, index) => {
+    const movies = this.state.movies
+    console.log("this is movies state" , movies);
+    return movies.map((movie) => {
       return (
-        <Movie key={index}
-          name={movie.movieName}
-          cover={movie.movieCover}
-          id={movie.movieID}
+        <Movie
+          key={movie.id}
+          name={movie.title}
+          id={movie.id}
         />
       );
     });
   }
 
-  componentDidMount() {
-    const server = "/rest/shows";
-    fetch(server)
-      .then(data => {
-        return data.json();
-      })
-      .then(json => {
-        console.log(json);
-      })
-  }
-
   render() {
     return (
-      <div>
-        <div className="flex-container">{this.handleMoviesListMapping()}</div>
-      </div>
+        <div className="flex-container">
+          {this.handleMoviesListMapping()}
+        </div>
     );
   }
 }
