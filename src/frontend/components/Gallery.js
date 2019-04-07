@@ -7,7 +7,7 @@ export default class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: []
+      movies: ""
     };
     this.handleMoviesListMapping = this.handleMoviesListMapping.bind(this);
   }
@@ -39,7 +39,7 @@ export default class Gallery extends Component {
   }
 
   render() {
-      if(this.state.movies != []) {
+      if(this.state.movies) {
         return ( 
           <div className="flex-container">
             {this.handleMoviesListMapping()}
