@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
+import Loader from "../components/Loader";
 class Details extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +55,7 @@ class Details extends Component {
         </div>
       );
     } else {
-      return <div>Loading...</div>;
+      return <div><Loader/></div>;
     }
   }
 }

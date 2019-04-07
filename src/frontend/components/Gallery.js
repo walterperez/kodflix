@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 //Components
 import Movie from "./Movie";
+import Loader from "./Loader";
 
 export default class Gallery extends Component {
   constructor(props) {
@@ -19,9 +20,6 @@ export default class Gallery extends Component {
         this.setState(
           {
             movies: json
-          },
-          () => {
-            console.log(this.state);
           }
         );
       });
@@ -29,7 +27,6 @@ export default class Gallery extends Component {
 
   handleMoviesListMapping() {
     const movies = this.state.movies
-    console.log("this is movies state" , movies);
     return movies.map((movie) => {
       return (
         <Movie
@@ -42,10 +39,16 @@ export default class Gallery extends Component {
   }
 
   render() {
-    return (
+      if(this.state.movies != []) {
+        return ( 
         <div className="flex-container">
           {this.handleMoviesListMapping()}
         </div>
-    );
+        )} else { 
+        return (
+          <div>
+            <Loader/>
+          </div>
+        )}
   }
 }
