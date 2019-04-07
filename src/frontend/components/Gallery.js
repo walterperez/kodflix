@@ -12,7 +12,7 @@ export default class Gallery extends Component {
     this.handleMoviesListMapping = this.handleMoviesListMapping.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount () {
     let server = "/rest/shows";
     fetch(server)
       .then(data => data.json())
@@ -41,14 +41,11 @@ export default class Gallery extends Component {
   render() {
       if(this.state.movies != []) {
         return ( 
-        <div className="flex-container">
-          {this.handleMoviesListMapping()}
-        </div>
-        )} else { 
-        return (
-          <div>
-            <Loader/>
+          <div className="flex-container">
+            {this.handleMoviesListMapping()}
           </div>
-        )}
+        )} 
+      else 
+        { return <div><Loader/></div> }
   }
 }
