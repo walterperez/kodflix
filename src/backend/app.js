@@ -1,24 +1,37 @@
 const express = require("express");
 const app = express();
-const movies = require("./moviesDB");
+// const movies = require("./moviesDB");
 const path = require("path");
 
 //Settings
 const port = process.env.PORT || 3001;
 
-//Static
-app.use(express.static(path.join(__dirname, "./../../build")));
+//MongoDB
+const db = require("./db");
 
-//Routes
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './../../build/', 'index.html'));
-});
+db.connect().then(db => {
+  //Static
+  app.use(express.static(path.join(__dirname, "./../../build")));
 
-app.get("/rest/shows", (req,res) => {
-    res.send(movies);
-});
+  //Routes
+  app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "./../../build/", "index.html"));
+  });
+  app.get("/rest/shows", (req, res) => {
+    let collection = db.collection("shows");
+    collection.find({}).toArray(function(err, result) {
+      (err) ? 
+        res.send(err)
+       : (result.length) ? 
+        res.send(result)
+       : 
+        res.send("No documents found");
+      
+    });
+  });
 
-//Server Run
-app.listen(port, () => {
+  //Server Run
+  app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
+  });
 });
