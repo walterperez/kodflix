@@ -20,13 +20,13 @@ db.connect().then(db => {
   app.get("/rest/shows", (req, res) => {
     let collection = db.collection("shows");
     collection.find({}).toArray(function(err, result) {
-      if (err) {
-        res.send(err);
-      } else if (result.length) {
-        res.send(result);
-      } else {
+      (err) ? 
+        res.send(err)
+       : (result.length) ? 
+        res.send(result)
+       : 
         res.send("No documents found");
-      }
+      
     });
   });
 
