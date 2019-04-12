@@ -9,7 +9,12 @@ const port = process.env.PORT || 3001;
 //MongoDB
 const db = require("./db");
 
+
 db.connect().then(db => {
+
+  //Middlewares
+  app.use(express.json());
+  
   //Static
   app.use(express.static(path.join(__dirname, "./../../build")));
 
@@ -20,13 +25,8 @@ db.connect().then(db => {
   app.get("/rest/shows", (req, res) => {
     let collection = db.collection("shows");
     collection.find({}).toArray(function(err, result) {
-      (err) ? 
-        res.send(err)
-       : (result.length) ? 
-        res.send(result)
-       : 
-        res.send("No documents found");
-      
+      if (err) throw err;
+      result.length ? res.json(result) : res.send("No documents found");
     });
   });
 
