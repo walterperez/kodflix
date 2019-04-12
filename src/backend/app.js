@@ -10,6 +10,26 @@ const port = process.env.PORT || 3001;
 const db = require("./db");
 
 db.connect().then(db => {
+
+  //Middlewares
+  app.use(express.json());
+  
+  //Static
+  app.use(express.static(path.join(__dirname, "./../../build")));
+
+  //Routes
+  app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "./../../build/", "index.html"));
+  });
+  app.get("/rest/shows", (req, res) => {
+    let collection = db.collection("shows");
+    collection.find({}).toArray(function(err, result) {
+      if (err) throw err;
+      result.length ? res.json(result) : res.send("No documents found");
+    });
+  });
+
+db.connect().then(db => {
   //Static
   app.use(express.static(path.join(__dirname, "./../../build")));
 

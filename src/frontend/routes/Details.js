@@ -29,10 +29,10 @@ class Details extends Component {
         } else {
           this.props.history.push("/NotFound");
         }
-      });
+    });
   }
 
-  render() {    
+  render() {
     if (this.state.movieName) {
       return (
         <div id="Details">
@@ -48,14 +48,20 @@ class Details extends Component {
             </p>
             <img
               className="movie-cover"
-              src={require(`./../common/img/${this.props.match.params.idMovie}.jpg`)}
+              src={require(`./../common/img/${
+                this.props.match.params.idMovie
+              }.jpg`)}
               alt={this.state.movieName}
             />
           </div>
         </div>
       );
     } else {
-      return <div><Loader/></div>;
+      return (
+        <div>
+          <Loader />
+        </div>
+      );
     }
   }
 }

@@ -15,11 +15,11 @@ export default class Gallery extends Component {
   componentDidMount () {
     let server = "/rest/shows";
     fetch(server)
-      .then(data => data.json())
-      .then(json => {
+      .then(response => response.json())
+      .then(shows => {
         this.setState(
           {
-            movies: json
+            movies: shows
           }
         );
       });
@@ -39,7 +39,7 @@ export default class Gallery extends Component {
   }
 
   render() {
-      if(this.state.movies) {
+      if(this.state.movies.length >= 1) {
         return ( 
           <div className="flex-container">
             {this.handleMoviesListMapping()}
