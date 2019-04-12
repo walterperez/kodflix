@@ -26,6 +26,7 @@ function connect() {
       assert.equal(null, err);
       const db = client.db(dbName);
       console.log("Connected successfully to server: ", db.s.databaseName);
+      resolve(db);
     });
   });
 }
