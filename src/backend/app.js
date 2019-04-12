@@ -55,3 +55,4 @@ db.connect().then(db => {
     console.log(`Server running on port: ${port}`);
   });
 });
+})
