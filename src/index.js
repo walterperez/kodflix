@@ -12,11 +12,12 @@ ReactDOM.render(<Router><App /></Router>, document.getElementById('root'));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-/*  Sirve para recargar un trozo de pagina
+/*  
+    Sirve para recargar un trozo de pagina
     al modificar un componente, y no tener
     que reiniciar todo el servidor por cambios
     pequenios.
- */
+*/
 if(module.hot) {
     module.hot.accept();
 }
