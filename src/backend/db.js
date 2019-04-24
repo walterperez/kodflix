@@ -2,12 +2,10 @@ const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
 const assert = require("assert");
 require("dotenv/config");
-
 let url = "";
 let dbName = "";
 if (process.env.NODE_ENV) {
   console.log(process.env.NODE_ENV);
-
   //If we are in PRODUCTION
   url = process.env.DB_URL_PRD;
   console.log(url);
@@ -18,7 +16,6 @@ if (process.env.NODE_ENV) {
   url = "mongodb://localhost:27017";
   dbName = "kodflix"; //k in lowercase in DEV
 }
-
 function connect() {
   const client = new MongoClient(url, { useNewUrlParser: true });
   return new Promise(resolve => {
@@ -30,5 +27,4 @@ function connect() {
     });
   });
 }
-
 module.exports = { connect };
