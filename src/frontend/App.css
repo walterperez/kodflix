@@ -168,3 +168,25 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+
+/* Hamburger Button */
+.HamburgerButton {
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 255, 0, 0.8);
+  border-radius: 50%;
+  padding: 10px;
+  z-index: 100;
+}
+.HamburgerButton:hover {
+  background-color: rgba(209, 209, 5, 0.8);
+  cursor: pointer;
+}
+
+.HamburgerButton-icon {
+  flex: 1;
+  color: gray;
+}

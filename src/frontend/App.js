@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import {Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import "./App.css";
 import Gallery from "./components/Gallery";
 import Details from "./routes/Details";
 import NotFound from "./routes/NotFound";
 //Google Analitycs
 import ReactGA from "react-ga";
-
+import HamburgerButton from "./components/HamburgerButton";
 
 class App extends Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class App extends Component {
   render() {
     return (
       <div className="container">
+        <HamburgerButton />
         <Switch>
           <Route exact path="/" component={Gallery} />
           <Route exact path="/:idMovie" component={Details} />
