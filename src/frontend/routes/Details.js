@@ -11,15 +11,11 @@ class Details extends Component {
     };
   }
 
-  componentWillMount() {
-    let server = "/rest/shows";
+  componentDidMount() {
+    let server = `/rest/shows/${this.props.match.params.idMovie}`;
     fetch(server)
       .then(data => data.json())
-      .then(movies => {
-        let idMovie = this.props.match.params.idMovie;
-        let movie = movies.find(movie => {
-          return movie.id === idMovie;
-        });
+      .then(movie => {
         if (movie) {
           this.setState({
             movieName: movie.title,
@@ -29,7 +25,7 @@ class Details extends Component {
         } else {
           this.props.history.push("/NotFound");
         }
-    });
+      });
   }
 
   render() {
