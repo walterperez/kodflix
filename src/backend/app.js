@@ -28,6 +28,14 @@ db.connect().then(db => {
     });
   });
 
+  app.get("/rest/shows/:movie", (req, res) => {
+    let collection = db.collection("shows");
+    let movieIdReq = req.params.movie;
+    collection.findOne({ id: movieIdReq }, function(err, result) {
+      err ? res.send(err) : res.send(result);
+    });
+  });
+
   //Server Run
   app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
