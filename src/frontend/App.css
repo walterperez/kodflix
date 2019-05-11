@@ -180,6 +180,8 @@ h1 {
   border-radius: 50%;
   padding: 10px;
   z-index: 100;
+  animation-name: hammburger-animation;
+  animation-duration: 1.5s;
 }
 .HamburgerButton:hover {
   background-color: rgba(209, 209, 5, 0.8);
@@ -189,4 +191,21 @@ h1 {
 .HamburgerButton-icon {
   flex: 1;
   color: gray;
+}
+
+@keyframes hammburger-animation {
+  0% {
+    top: -10px;
+    left: -10px;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  100% {
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+  }
 }
