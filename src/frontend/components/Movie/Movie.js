@@ -5,7 +5,7 @@ export default function Movie(props) {
   return (
     <Link to={props.id} className="flex-element">
       <img
-        src={require(`./../../common/img/${props.id}.jpg`)}
+        src={require(`./../../common/img/covers/${props.id}.jpg`)}
         alt={`${props.name} Cover`}
       />
       <div className="box">

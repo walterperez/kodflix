@@ -37,25 +37,18 @@ class Details extends Component {
   render() {
     if (this.state.movieName) {
       return (
-        <div id="Details">
-          <h1 className="movie-title">{this.state.movieName}</h1>
+        <div className="Details">
           <div className="details-container">
-            <p className="description">
-              {this.state.movieDescription}
-              <br />
-              <br />
-              <span className="return-btn">
-                <Link to="/">Home</Link>
-              </span>
-            </p>
-            <img
-              className="movie-cover"
-              src={require(`./../../common/img/${
-                this.props.match.params.idMovie
-              }.jpg`)}
-              alt={this.state.movieName}
-            />
+            <h1 className="movie-title">{this.state.movieName}</h1>
+            <p className="description">{this.state.movieDescription}</p>
           </div>
+          <img
+            className="movie-cover"
+            src={require(`./../../common/img/wallpapers/${
+              this.props.match.params.idMovie
+            }.jpg`)}
+            alt={this.state.movieName}
+          />
         </div>
       );
     } else if (this.state.error) {
