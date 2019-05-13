@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
-import "./App.css";
-import Gallery from "./components/Gallery";
-import Details from "./routes/Details";
-import NotFound from "./routes/NotFound";
+import "./App.scss";
+//Components
+import Gallery from "./components/Gallery/Gallery";
+import HamburgerButton from "./components/HamburgerButton/HamburgerButton";
+import ManageTvShows from "./components/ManageTvShows/ManageTvShows";
+//Routes
+import Details from "./routes/Details/Details";
+import NotFound from "./routes/NotFound/NotFound";
 //Google Analitycs
 import ReactGA from "react-ga";
-import HamburgerButton from "./components/HamburgerButton";
 
 class App extends Component {
   constructor(props) {
@@ -25,12 +28,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="App">
         <HamburgerButton />
         <Switch>
           <Route exact path="/" component={Gallery} />
+          <Route exact path="/manage/tv-shows" component={ManageTvShows} />
           <Route exact path="/:idMovie" component={Details} />
-          <Route exact path="/NotFound" component={NotFound} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     );

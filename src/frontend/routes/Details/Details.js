@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import Loader from "../components/Loader";
+import { Link, withRouter, Redirect } from "react-router-dom";
+import "./Details.scss";
+import Loader from "./../../components/Loader/Loader";
 class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
       movieID: "",
       movieName: "",
-      movieDescription: ""
+      movieDescription: "",
+      error: "",
+      isLoading: true
     };
   }
 
@@ -16,15 +19,18 @@ class Details extends Component {
     fetch(server)
       .then(data => data.json())
       .then(movie => {
-        if (movie) {
-          this.setState({
-            movieName: movie.title,
-            movieID: movie.id,
-            movieDescription: movie.synopsis
-          });
-        } else {
-          this.props.history.push("/NotFound");
-        }
+        this.setState({
+          movieName: movie.title,
+          movieID: movie.id,
+          movieDescription: movie.synopsis
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: err,
+          isLoading: !this.state.isLoading
+        });
+        // this.props.history.push("/NotFound");
       });
   }
 
@@ -44,7 +50,7 @@ class Details extends Component {
             </p>
             <img
               className="movie-cover"
-              src={require(`./../common/img/${
+              src={require(`./../../common/img/${
                 this.props.match.params.idMovie
               }.jpg`)}
               alt={this.state.movieName}
@@ -52,12 +58,16 @@ class Details extends Component {
           </div>
         </div>
       );
-    } else {
+    } else if (this.state.error) {
+      return <Redirect to="/NotFound" />;
+    } else if (this.state.isLoading) {
       return (
         <div>
           <Loader />
         </div>
       );
+    } else {
+      return <h1>Not Found from the gallery component! =(</h1>;
     }
   }
 }

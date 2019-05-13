@@ -1,0 +1,103 @@
+/* Hamburger Button */
+.HamburgerButton {
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #141f31;
+  border-radius: 50%;
+  padding: 10px;
+  z-index: 100;
+  animation-name: hammburger-animation;
+  animation-duration: 1.5s;
+}
+.HamburgerButton:hover {
+  background-color: #1e2b41;
+  cursor: pointer;
+}
+
+.HamburgerButton-icon {
+  flex: 1;
+  color: gray;
+}
+
+@keyframes hammburger-animation {
+  0% {
+    top: -10px;
+    left: -10px;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  100% {
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.Menu-List {
+  box-sizing: border-box;
+  background-color: #141f31;
+  padding-top: 100px;
+  position: fixed;
+  height: 100vh;
+  width: 300px;
+  left: -100%;
+  top: 0;
+  bottom: 0;
+  z-index: 50;
+  transition: all ease-out 0.5s;
+  overflow: hidden;
+}
+
+.visible {
+  left: 0% !important;
+}
+
+.translucid_backgroud {
+  background-color: rgba(20, 30, 48, 0.5);
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.Menu-item {
+  width: 100%;
+  height: 60px;
+  max-height: 60px;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #0f1724;
+    transform: scale(1.05);
+    transition: all 0.5s linear;
+    overflow: hidden;
+  }
+  .menu_list_icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    flex: 1;
+  }
+  .menu_list_text {
+    display: block;
+    text-align: center;
+    flex: 2;
+    font-size: 1.2em;
+    text-decoration: none !important;
+    color: rgba(209, 209, 5, 1);
+  }
+}
