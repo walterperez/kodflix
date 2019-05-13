@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./HamburgerButton.scss";
+//Components
+import MenuListElement from "./MenuListElement/MenuListElement";
 //Icons
 import hamburgerButtonIcon from "./../../common/icons/hamburgerIcon.svg";
 import tvIconSVG from "./../../common/icons/cinema.svg";
+import homeIconSVG from "./../../common/icons/icon.svg";
 
 export default class HamburgerButton extends Component {
   constructor() {
@@ -12,9 +15,16 @@ export default class HamburgerButton extends Component {
       isMenuActive: false,
       isVisible: "visible"
     };
+    this.handleCloseMenuAfterClick = this.handleCloseMenuAfterClick.bind(this);
   }
 
   handleClick() {
+    this.setState({
+      isMenuActive: !this.state.isMenuActive
+    });
+  }
+
+  handleCloseMenuAfterClick() {
     this.setState({
       isMenuActive: !this.state.isMenuActive
     });
@@ -40,12 +50,18 @@ export default class HamburgerButton extends Component {
               this.state.isMenuActive ? this.state.isVisible : null
             }`}
           >
-            <Link to="/manage/tv-shows" style={{ textDecoration: "none" }}>
-              <div className="Menu-item">
-                <img src={tvIconSVG} alt="tv icon" className="menu_list_icon" />
-                <p className="menu_list_text">Manage TV Shows</p>
-              </div>
-            </Link>
+            <MenuListElement
+              text="Home"
+              icon={homeIconSVG}
+              route="/"
+              handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
+            />
+            <MenuListElement
+              text="Manage TV Shows"
+              icon={tvIconSVG}
+              route="/manage/tv-shows"
+              handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
+            />
           </div>
         </div>
       </>
