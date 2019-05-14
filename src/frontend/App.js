@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import "./App.scss";
 //Components
 import Gallery from "./components/Gallery/Gallery";
+import Play from "./components/Play/Play";
 import HamburgerButton from "./components/HamburgerButton/HamburgerButton";
 import ManageTvShows from "./components/ManageTvShows/ManageTvShows";
 //Routes
@@ -33,6 +34,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Gallery} />
           <Route exact path="/manage/tv-shows" component={ManageTvShows} />
+          <Route exact path="/:idMovie/play" component={Play} />
           <Route exact path="/:idMovie" component={Details} />
           <Route component={NotFound} />
         </Switch>
