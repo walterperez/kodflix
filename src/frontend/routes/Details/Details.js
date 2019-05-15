@@ -41,6 +41,9 @@ class Details extends Component {
           <div className="details-container">
             <h1 className="movie-title">{this.state.movieName}</h1>
             <p className="description">{this.state.movieDescription}</p>
+            <Link to={`/${this.props.match.params.idMovie}/play`}>
+              <div className="PlayButton" />
+            </Link>
           </div>
           <img
             className="movie-cover"
