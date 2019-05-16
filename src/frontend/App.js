@@ -33,7 +33,7 @@ class App extends Component {
         <HamburgerButton />
         <Switch>
           <Route exact path="/" component={Gallery} />
-          <Route exact path="/manage/tv-shows" component={ManageTvShows} />
+          <Route path="/manage/tv-shows" component={ManageTvShows} />
           <Route exact path="/:idMovie/play" component={Play} />
           <Route exact path="/:idMovie" component={Details} />
           <Route component={NotFound} />
