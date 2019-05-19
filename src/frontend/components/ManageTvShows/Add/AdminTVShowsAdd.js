@@ -17,8 +17,18 @@ export default class AdminTVShowsAdd extends Component {
     });
   }
 
-  handleFormSubmit(e) {
-    //FETCH WITH POST METHOD
+  handleFormSubmit() {
+    const { title, description } = this.state;
+    const myBody = { title, description };
+    fetch("/rest/shows/add", {
+      method: "POST",
+      body: JSON.stringify(myBody),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(data => console.log(data));
   }
 
   render() {
