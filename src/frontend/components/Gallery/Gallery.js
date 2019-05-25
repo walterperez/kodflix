@@ -13,8 +13,7 @@ export default class Gallery extends Component {
   }
 
   componentDidMount() {
-    let server = "/rest/shows";
-    fetch(server)
+    fetch("/rest/shows")
       .then(response => response.json())
       .then(shows => {
         this.setState({

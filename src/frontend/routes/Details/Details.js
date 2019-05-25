@@ -17,7 +17,7 @@ class Details extends Component {
   componentDidMount() {
     let server = `/rest/shows/${this.props.match.params.idMovie}`;
     fetch(server)
-      .then(data => data.json())
+      .then(response => response.json())
       .then(movie => {
         this.setState({
           movieName: movie.title,
@@ -26,10 +26,13 @@ class Details extends Component {
         });
       })
       .catch(err => {
-        this.setState({
-          error: err,
-          isLoading: !this.state.isLoading
-        });
+        this.setState(
+          {
+            error: err,
+            isLoading: !this.state.isLoading
+          },
+          () => console.log(this.state)
+        );
         // this.props.history.push("/NotFound");
       });
   }

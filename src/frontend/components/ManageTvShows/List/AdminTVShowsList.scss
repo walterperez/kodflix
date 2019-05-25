@@ -2,17 +2,40 @@
   color: black;
   margin: 0;
   padding: 2em 10%;
-  background: linear-gradient(rgba(3, 13, 68, 0.945), rgb(38, 3, 41));
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   .AdminTVShowsList__title {
     color: white;
+    width: 50%;
+    margin: 0 auto;
+    padding-bottom: 0.5em;
   }
   .AdminTVShowsList__List__TVShows {
-    padding: 0 10%;
+    padding: 0;
+    border: solid 2px white;
+    box-shadow: 0 10px 15px 5px rgba(3, 13, 68, 0.45);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
     .AdminTVShowsList__List__item--show {
+      border-bottom: solid 2px white;
+      background-color: rgba(41, 41, 41, 0.452);
       color: white;
       font-size: 1em;
       list-style: none;
       padding: 1em 3em;
+      transition: all 0.3s linear;
       &:hover {
         background-color: rgba(3, 13, 68, 0.45);
         color: gold;

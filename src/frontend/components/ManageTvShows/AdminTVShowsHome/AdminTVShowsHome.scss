@@ -1,0 +1,41 @@
+.AdminTVShowsHome {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vmin;
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 2em 10%;
+  .AdminTVShowsHome__Title {
+    color: white;
+  }
+  .AdminTVShowsHome__Menu {
+    .AdminTVShowsHome__Menu__List {
+      list-style: none;
+      .AdminTVShowsHome__Menu__Item {
+        font-size: 1em;
+        font-weight: bold;
+        color: black;
+        display: inline-block;
+        padding: 1em 2em;
+        background: gold;
+        margin-right: 1em;
+        transition: all 0.3s linear;
+        &:hover {
+          background-color: goldenrod;
+          color: white;
+        }
+      }
+    }
+  }
+}
