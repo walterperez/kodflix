@@ -7,6 +7,7 @@ import MenuListElement from "./MenuListElement/MenuListElement";
 import hamburgerButtonIcon from "./../../common/icons/hamburgerIcon.svg";
 import tvIconSVG from "./../../common/icons/cinema.svg";
 import homeIconSVG from "./../../common/icons/icon.svg";
+import LogInSVG from "./../../common/icons/log-in.svg";
 
 export default class HamburgerButton extends Component {
   constructor() {
@@ -60,6 +61,12 @@ export default class HamburgerButton extends Component {
               text="Manage TV Shows"
               icon={tvIconSVG}
               route="/manage/tv-shows"
+              handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
+            />
+            <MenuListElement
+              text="Sign In"
+              icon={LogInSVG}
+              route="/sign/in"
               handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
             />
           </div>

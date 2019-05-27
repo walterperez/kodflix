@@ -6,6 +6,7 @@ import Gallery from "./components/Gallery/Gallery";
 import Play from "./components/Play/Play";
 import HamburgerButton from "./components/HamburgerButton/HamburgerButton";
 import ManageTvShows from "./components/ManageTvShows/ManageTvShows";
+import SignIn from "./components/SignIn/SignIn";
 //Routes
 import Details from "./routes/Details/Details";
 import NotFound from "./routes/NotFound/NotFound";
@@ -33,6 +34,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Gallery} />
           <Route path="/manage/tv-shows" component={ManageTvShows} />
+          <Route path="/sign/in" component={SignIn} />
           <Route exact path="/:idMovie/play" component={Play} />
           <Route exact path="/:idMovie" component={Details} />
           <Route component={NotFound} />
