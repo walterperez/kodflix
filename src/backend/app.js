@@ -260,6 +260,18 @@ db.connect().then(db => {
     });
   });
 
+  // @route   GET /rest/user/sign/in
+  // @desc    Sign in using email and password
+  // @access  Public
+  app.get("/rest/user/sign/in", async (req, res) => {
+    const { email, password } = req.body;
+    const collection = db.collection("users");
+    const user = await collection.find({ email });
+    user.password === password
+      ? res.send("Correct Credentials")
+      : res.send("Error! User or Password incorrect!");
+  });
+
   //Server Run
   app.listen(port, () => {
     console.log(`Server running on port: ${port}`);

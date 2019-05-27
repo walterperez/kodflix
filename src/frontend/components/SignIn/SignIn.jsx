@@ -19,7 +19,7 @@ export default class SignIn extends Component {
 
   handleSignInSubmit() {
     fetch("/rest/user/sign/in", {
-      method: "POST",
+      method: "GET",
       body: this.state
     });
   }
