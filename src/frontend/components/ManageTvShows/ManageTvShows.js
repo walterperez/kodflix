@@ -14,7 +14,11 @@ export default function ManageTvShows({ match }) {
         <Route exact path={`${match.path}/`} component={AdminTVShowsHome} />
         <Route exact path={`${match.path}/list`} component={AdminTVShowsList} />
         <Route exact path={`${match.path}/add`} component={AdminTVShowsAdd} />
-        <Route exact path={`${match.path}/edit`} component={AdminTVShowsEdit} />
+        <Route
+          exact
+          path={`${match.path}/edit/:idMovie`}
+          component={AdminTVShowsEdit}
+        />
       </Switch>
     </div>
   );

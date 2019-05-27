@@ -5,15 +5,25 @@
   width: 100%;
   min-height: 100vmin;
   height: 100%;
-  background: linear-gradient(rgba(3, 13, 68, 0.945), rgb(38, 3, 41));
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   .AdminTVShowsAdd__Form__Container {
     box-shadow: 0 10px 15px 5px rgba(21, 0, 80, 0.301);
-    border-radius: 15px;
     background-color: rgba(230, 230, 230, 0.411);
     max-width: 400px;
     width: auto;
     margin: 0 auto;
-    border: solid 3px white;
     padding: 2em 1em;
     .AdminTVShowsAdd__Form_Item--Text {
       margin: 0;
@@ -21,13 +31,15 @@
     }
     .AdminTVShowsAdd__Form_Item {
       padding: 1em;
-      border-radius: 10px;
+      border-radius: 5px;
       border: 0;
+      border: solid rgb(192, 190, 190) 2px;
       margin-bottom: 1em;
     }
     .AdminTVShowsAdd__Form_Item--Description {
       padding: 1em;
       border: 0;
+      border: solid rgb(192, 190, 190) 2px;
       border-radius: 5px;
       margin-bottom: 1em;
     }

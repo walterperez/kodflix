@@ -23,7 +23,6 @@ class App extends Component {
     ReactGA.pageview(window.location.pathname + window.location.search);
     this.props.history.listen((loc, act) => {
       ReactGA.pageview(window.location.pathname + window.location.search);
-      console.log(act, loc.pathname, loc.state);
     });
   }
 

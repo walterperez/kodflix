@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./AdminTVShowsList.scss";
 import Loader from "./../../Loader/Loader";
 export default class AdminTVShowsList extends Component {
@@ -27,7 +28,13 @@ export default class AdminTVShowsList extends Component {
             {shows.map((show, index) => {
               return (
                 <li className="AdminTVShowsList__List__item--show" key={index}>
-                  {show.title}
+                  {show.title}{" "}
+                  <Link
+                    to={`/manage/tv-shows/edit/${show.id}`}
+                    className="AdminTVShowsList__List__item--Link"
+                  >
+                    Edit
+                  </Link>
                 </li>
               );
             })}

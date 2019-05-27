@@ -14,9 +14,6 @@ export default function AdminTVShowsHome({ match }) {
           <Link to={`${match.path}add`}>
             <li className="AdminTVShowsHome__Menu__Item">Add a new TV show</li>
           </Link>
-          <Link to={`${match.path}edit`}>
-            <li className="AdminTVShowsHome__Menu__Item">Edit a TV show</li>
-          </Link>
         </ul>
       </div>
     </div>
