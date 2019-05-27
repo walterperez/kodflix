@@ -77,17 +77,31 @@ db.connect().then(db => {
     (req, res) => {
       const originalname = req.files.photo[0].originalname;
       const { title, description, trailer } = req.body;
-      let collection = db.collection("shows");
+      const idMovie = title.split(" ").join("-");
       const newUrl = trailer.replace(/watch\?v=/gi, "embed/");
-      const newName = originalname.replace(/.jpg/, "");
+      let collection = db.collection("shows");
+      //Add to the db the form information
       let document = {
-        id: newName,
+        id: idMovie,
         title,
         synopsis: description,
         movieUrl: newUrl
       };
       collection.insert(document, { w: 1 });
-      res.json({ id: newName });
+      //Change cover name to the Id
+      const oldPath =
+        __dirname + `./../frontend/common/img/covers/${originalname}`;
+      const newPath =
+        __dirname + `./../frontend/common/img/covers/${idMovie}.jpg`;
+
+      fs.rename(oldPath, newPath, err => {
+        if (err) {
+          console.log(err);
+          res.send({ err });
+        } else {
+          res.json({ id: idMovie });
+        }
+      });
     }
   );
 
@@ -218,6 +232,33 @@ db.connect().then(db => {
       });
     }
   );
+
+  // @route   PATCH /rest/shows/delete/:idMovie
+  // @desc    delete one tv show with id idMovie
+  // @access  Public
+  app.delete("/rest/shows/delete/:idMovie", (req, res) => {
+    const idMovie = req.params.idMovie;
+    const collection = db.collection("shows");
+    const oldPhotoPath =
+      __dirname + `./../frontend/common/img/covers/${idMovie}.jpg`;
+    const oldWallpaperPath =
+      __dirname + `./../frontend/common/img/wallpapers/${idMovie}.jpg`;
+
+    //Delete two images: cover & wallpaper
+    fs.unlink(oldPhotoPath, err => {
+      if (err) throw err;
+      console.log(`successfully deleted ${oldPhotoPath}`);
+    });
+    fs.unlink(oldWallpaperPath, err => {
+      if (err) throw err;
+      console.log(`successfully deleted ${oldWallpaperPath}`);
+    });
+
+    //Delete all data from DB
+    collection.deleteOne({ id: idMovie }, (err, result) => {
+      err ? res.send(err) : res.send(result);
+    });
+  });
 
   //Server Run
   app.listen(port, () => {

@@ -38,23 +38,39 @@
       padding: 1em 3em;
       transition: all 0.1s linear;
       &:hover {
-        background-color: rgba(0, 0, 0, 0.74);
+        background-color: rgba(0, 0, 0, 0.5);
         color: gold;
       }
       .AdminTVShowsList__List__item--Link {
         display: inline-block;
-        color: orangered;
+        color: black;
         background: gold;
         font-weight: bold;
         border-radius: 5px;
-        padding: 0.1em 0.5em;
+        padding: 0.2em 0.7em;
+        text-decoration: none;
+        transition: all 0.1s linear;
+        margin: 0 1em;
+      }
+      .AdminTVShowsList__List__item--Link:hover {
+        color: black;
+        background: yellow;
+        transform: scale(1.1);
+      }
+      .AdminTVShowsList__List__item--Delete--Button {
+        display: inline-block;
+        background: red;
+        border: 0;
+        font-weight: bold;
+        border-radius: 5px;
+        padding: 0.5em 1em;
         text-decoration: none;
         transition: all 0.1s linear;
       }
-      .AdminTVShowsList__List__item--Link:hover {
-        color: orangered;
-        background: yellow;
+      .AdminTVShowsList__List__item--Delete--Button:hover {
+        background: rgb(255, 55, 55);
         transform: scale(1.1);
+        cursor: pointer;
       }
     }
   }

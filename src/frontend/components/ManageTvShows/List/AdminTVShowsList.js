@@ -10,6 +10,15 @@ export default class AdminTVShowsList extends Component {
     };
   }
 
+  handleDeleteMovie(e) {
+    const { name } = e.target;
+    fetch(`/rest/shows/delete/${name}`, {
+      method: "DELETE"
+    })
+      .then(response => response.json())
+      .then(json => console.log(json));
+  }
+
   componentDidMount() {
     fetch("/rest/shows")
       .then(response => response.json())
@@ -35,6 +44,13 @@ export default class AdminTVShowsList extends Component {
                   >
                     Edit
                   </Link>
+                  <button
+                    name={show.id}
+                    onClick={e => this.handleDeleteMovie(e)}
+                    className="AdminTVShowsList__List__item--Delete--Button"
+                  >
+                    Delete
+                  </button>
                 </li>
               );
             })}
