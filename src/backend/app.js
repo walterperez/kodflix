@@ -47,11 +47,16 @@ db.connect().then(db => {
   //Static
   app.use(express.static(path.join(__dirname, "./../../build")));
 
-  //Routes
+  // @route   GET /
+  // @desc    Send index.html
+  // @access  Public
   app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "./../../build/", "index.html"));
   });
 
+  // @route   GET /rest/shows
+  // @desc    Send All the movies in the server
+  // @access  Public
   app.get("/rest/shows", (req, res) => {
     let collection = db.collection("shows");
     collection.find({}).toArray(function(err, result) {
@@ -63,6 +68,9 @@ db.connect().then(db => {
     });
   });
 
+  // @route   POST /rest/shows/add/photo
+  // @desc    Create a new movie, adding title, description, trailerUrl and a movie cover image;
+  // @access  Public
   app.post(
     "/rest/shows/add/photo",
     uploadPhoto.fields(filesToBeUpload),
@@ -83,6 +91,9 @@ db.connect().then(db => {
     }
   );
 
+  // @route   POST /rest/shows/add/wallpaper
+  // @desc    Add wallpaper image with the name (the id movie);
+  // @access  Public
   app.post(
     "/rest/shows/add/wallpaper",
     uploadWallpaper.fields(wallpaperToBeUpload),
@@ -106,6 +117,9 @@ db.connect().then(db => {
     }
   );
 
+  // @route   GET /rest/shows/:movie
+  // @desc    Send the Movie searched by ID
+  // @access  Public
   app.get("/rest/shows/:movie", (req, res) => {
     let collection = db.collection("shows");
     let movieIdReq = req.params.movie;
@@ -114,6 +128,9 @@ db.connect().then(db => {
     });
   });
 
+  // @route   PATCH /rest/shows/edit/cover/:movieId
+  // @desc    update cover image (if there is) and update title, description, and trailerUrl (if there is)
+  // @access  Public
   app.patch(
     "/rest/shows/edit/photo/:movieId",
     uploadPhoto.fields(filesToBeUpload),
