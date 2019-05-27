@@ -6,7 +6,9 @@ export default class SignIn extends Component {
     super();
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      message: "",
+      error: ""
     };
   }
 
@@ -19,19 +21,37 @@ export default class SignIn extends Component {
 
   handleSignInSubmit() {
     fetch("/rest/user/sign/in", {
-      method: "GET",
-      body: this.state
-    });
+      method: "POST",
+      body: JSON.stringify(this.state),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log("json", json);
+        const message = json.message;
+        const error = json.error;
+        this.setState({
+          message,
+          error
+        });
+      });
   }
 
   render() {
+    const { message, error } = this.state;
     return (
       <div className="SignIn">
         <h1 className="SignIn__Title">Sign In</h1>
+        {error ? (
+          <h2 className="SignIn__Title">Opps! Wrong email or password!</h2>
+        ) : null}
+        {message ? <h2 className="SignIn__Title">{message}</h2> : null}
         <div className="SignIn__Inputs--Container">
           <input
             className="SignIn__Inputs--Container__Item"
-            type="text"
+            type="email"
             name="email"
             placeholder="Email"
             onChange={e => this.handleInputChange(e)}
@@ -40,7 +60,7 @@ export default class SignIn extends Component {
           />
           <input
             className="SignIn__Inputs--Container__Item"
-            type="text"
+            type="password"
             name="password"
             placeholder="Password"
             onChange={e => this.handleInputChange(e)}

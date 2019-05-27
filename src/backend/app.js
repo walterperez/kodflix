@@ -34,6 +34,8 @@ const wallpaperToBeUpload = [
 ];
 
 //Middlewares
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 const uploadPhoto = multer({
   storage: storageCovers
 });
@@ -260,16 +262,19 @@ db.connect().then(db => {
     });
   });
 
-  // @route   GET /rest/user/sign/in
+  // @route   POST /rest/user/sign/in
   // @desc    Sign in using email and password
   // @access  Public
-  app.get("/rest/user/sign/in", async (req, res) => {
+  app.post("/rest/user/sign/in", (req, res) => {
     const { email, password } = req.body;
+    // console.log(req.body);
     const collection = db.collection("users");
-    const user = await collection.find({ email });
-    user.password === password
-      ? res.send("Correct Credentials")
-      : res.send("Error! User or Password incorrect!");
+    collection.findOne({ email }, (err, result) => {
+      if (err) throw err;
+      result.password === password
+        ? res.json({ message: "Correct Credentials" })
+        : res.json({ error: "Error! User or Password incorrect!" });
+    });
   });
 
   //Server Run
