@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "client-sessions": "^0.8.0",
+    "cookie-parser": "^1.4.4",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "mongodb": "^3.2.3",
@@ -17,6 +20,7 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
+    "db-prd-to-dev": "node ./src/backend/helpers/cloneProdDBtoLocalDB.js",
     "start-frontend": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./AdminTVShowsAdd.scss";
 
-export default class AdminTVShowsAdd extends Component {
+class AdminTVShowsAdd extends Component {
   constructor() {
     super();
     this.state = {
@@ -61,16 +62,35 @@ export default class AdminTVShowsAdd extends Component {
           body: myWallpapper
         })
           .then(response => response.json())
-          .then(data => console.log(data))
+          .then(data => {
+            this.setState({
+              title: "",
+              description: "",
+              trailer: "",
+              file: "",
+              wallpaper: "",
+              message: data.message
+            });
+            setTimeout(() => {
+              this.props.history.push("/");
+            }, 2000);
+          })
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
   }
 
   render() {
-    let { title, description, trailer } = this.state;
+    let { title, description, trailer, message } = this.state;
     return (
       <div className="AdminTVShowsAdd">
+        {message && (
+          <div className="confirmation__message">
+            <div className="confirmation__message__box">
+              <h3>{message}</h3>
+            </div>
+          </div>
+        )}
         <h3 className="AdminTVShowsAdd__Title">Add a TV show</h3>
         <div className="AdminTVShowsAdd__Form__Container">
           <form onSubmit={e => this.handleFormSubmit(e)}>
@@ -142,3 +162,4 @@ export default class AdminTVShowsAdd extends Component {
     );
   }
 }
+export default withRouter(AdminTVShowsAdd);

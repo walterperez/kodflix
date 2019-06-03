@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import "./AdminTVShowsEdit.scss";
 
-export default class AdminTVShowsEdit extends Component {
+class AdminTVShowsEdit extends Component {
   constructor() {
     super();
     this.state = {
@@ -53,7 +54,6 @@ export default class AdminTVShowsEdit extends Component {
     })
       .then(response => response.json())
       .then(json => {
-        console.log("My answer before second post: ", json);
         const name = json.id;
         myWallpapper.append("name", name);
         if (this.state.wallpaper) {
@@ -62,8 +62,34 @@ export default class AdminTVShowsEdit extends Component {
             body: myWallpapper
           })
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => {
+              this.setState({
+                id: "",
+                title: "",
+                description: "",
+                trailer: "",
+                file: "",
+                wallpaper: "",
+                message: data.message
+              });
+              setTimeout(() => {
+                this.props.history.push("/manage/tv-shows/list");
+              }, 3000);
+            })
             .catch(err => console.log(err));
+        } else {
+          this.setState({
+            id: "",
+            title: "",
+            description: "",
+            trailer: "",
+            file: "",
+            wallpaper: "",
+            message: json.message
+          });
+          setTimeout(() => {
+            this.props.history.push("/manage/tv-shows/list");
+          }, 2000);
         }
       })
       .catch(err => console.log(err));
@@ -84,9 +110,16 @@ export default class AdminTVShowsEdit extends Component {
   }
 
   render() {
-    let { title, description, trailer } = this.state;
+    let { title, description, trailer, message } = this.state;
     return (
       <div className="AdminTVShowsAdd">
+        {message && (
+          <div className="confirmation__message">
+            <div className="confirmation__message__box">
+              <h3>{message}</h3>
+            </div>
+          </div>
+        )}
         <h3 className="AdminTVShowsAdd__Title">Edit a TV show</h3>
         <div className="AdminTVShowsAdd__Form__Container">
           <form onSubmit={e => this.handleFormSubmit(e)}>
@@ -153,3 +186,5 @@ export default class AdminTVShowsEdit extends Component {
     );
   }
 }
+
+export default withRouter(AdminTVShowsEdit);

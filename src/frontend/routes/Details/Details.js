@@ -50,9 +50,7 @@ class Details extends Component {
           </div>
           <img
             className="movie-cover"
-            src={require(`./../../common/img/wallpapers/${
-              this.props.match.params.idMovie
-            }.jpg`)}
+            src={`/movies/wallpapers/${this.props.match.params.idMovie}.jpg`}
             alt={this.state.movieName}
           />
         </div>

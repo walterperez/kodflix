@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./AdminTVShowsList.scss";
 import Loader from "./../../Loader/Loader";
-export default class AdminTVShowsList extends Component {
+class AdminTVShowsList extends Component {
   constructor(props) {
     super();
     this.state = {
-      shows: []
+      shows: [],
+      message: ""
     };
   }
 
@@ -16,7 +17,20 @@ export default class AdminTVShowsList extends Component {
       method: "DELETE"
     })
       .then(response => response.json())
-      .then(json => console.log(json));
+      .then(json => {
+        this.setState({
+          id: "",
+          title: "",
+          description: "",
+          trailer: "",
+          file: "",
+          wallpaper: "",
+          message: json.message
+        });
+        setTimeout(() => {
+          this.props.history.push("/");
+        }, 2000);
+      });
   }
 
   componentDidMount() {
@@ -28,10 +42,17 @@ export default class AdminTVShowsList extends Component {
   }
 
   render() {
-    let { shows } = this.state;
+    let { shows, message } = this.state;
     if (shows) {
       return (
         <div className="AdminTVShowsList">
+          {message && (
+            <div className="confirmation__message">
+              <div className="confirmation__message__box">
+                <h3>{message}</h3>
+              </div>
+            </div>
+          )}
           <h3 className="AdminTVShowsList__title">List of avanibles movies:</h3>
           <ul className="AdminTVShowsList__List__TVShows">
             {shows.map((show, index) => {
@@ -62,3 +83,5 @@ export default class AdminTVShowsList extends Component {
     }
   }
 }
+
+export default withRouter(AdminTVShowsList);

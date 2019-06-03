@@ -8,6 +8,7 @@ import hamburgerButtonIcon from "./../../common/icons/hamburgerIcon.svg";
 import tvIconSVG from "./../../common/icons/cinema.svg";
 import homeIconSVG from "./../../common/icons/icon.svg";
 import LogInSVG from "./../../common/icons/log-in.svg";
+import LogOutSVG from "./../../common/icons/logOut.svg";
 
 export default class HamburgerButton extends Component {
   constructor() {
@@ -32,6 +33,7 @@ export default class HamburgerButton extends Component {
   }
 
   render() {
+    const { isLogged, changeLoged } = this.props;
     return (
       <>
         {/* Hamburger Button */}
@@ -44,6 +46,7 @@ export default class HamburgerButton extends Component {
         </div>
         {/* List Menu */}
         <div
+          onClick={() => this.handleCloseMenuAfterClick()}
           className={this.state.isMenuActive ? "translucid_backgroud" : null}
         >
           <div
@@ -57,18 +60,31 @@ export default class HamburgerButton extends Component {
               route="/"
               handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
             />
-            <MenuListElement
-              text="Manage TV Shows"
-              icon={tvIconSVG}
-              route="/manage/tv-shows"
-              handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
-            />
-            <MenuListElement
-              text="Sign In"
-              icon={LogInSVG}
-              route="/sign/in"
-              handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
-            />
+            {isLogged && (
+              <MenuListElement
+                text="Manage TV Shows"
+                icon={tvIconSVG}
+                route="/manage/tv-shows"
+                handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
+              />
+            )}
+            {!isLogged && (
+              <MenuListElement
+                text="Sign In"
+                icon={LogInSVG}
+                route="/sign/in"
+                handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
+              />
+            )}
+            {isLogged && (
+              <MenuListElement
+                text="Log out"
+                icon={LogOutSVG}
+                route="/sign/in"
+                handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
+                actionCB={changeLoged}
+              />
+            )}
           </div>
         </div>
       </>
