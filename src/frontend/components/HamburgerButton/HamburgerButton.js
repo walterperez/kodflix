@@ -33,7 +33,7 @@ export default class HamburgerButton extends Component {
   }
 
   render() {
-    const { isLogged, changeLoged } = this.props;
+    const { isLogged, changeLogged, isAdmin } = this.props;
     return (
       <>
         {/* Hamburger Button */}
@@ -60,7 +60,7 @@ export default class HamburgerButton extends Component {
               route="/"
               handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
             />
-            {isLogged && (
+            {isLogged && isAdmin && (
               <MenuListElement
                 text="Manage TV Shows"
                 icon={tvIconSVG}
@@ -82,7 +82,7 @@ export default class HamburgerButton extends Component {
                 icon={LogOutSVG}
                 route="/sign/in"
                 handleCloseMenuAfterClick={this.handleCloseMenuAfterClick}
-                actionCB={changeLoged}
+                actionCB={changeLogged}
               />
             )}
           </div>

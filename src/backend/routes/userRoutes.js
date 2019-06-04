@@ -30,12 +30,13 @@ userRoutes.post("/sign/in", (req, res) => {
   const collection = db.collection("users");
   collection.findOne({ email }, (err, result) => {
     if (err) throw err;
-    bcrypt.compare(password, result.password, function(err, result) {
+    bcrypt.compare(password, result.password, function(err, passMatch) {
       if (err) throw err;
-      if (result) {
+      if (passMatch) {
         req.mySession.auth = result._id;
         res.setHeader("Auth", `${result._id}`);
-        res.status(200).json({ message: "Correct Credentials" });
+        delete result.password;
+        res.status(200).json(result);
       } else {
         res.json({ error: "Error! User or Password incorrect!" });
       }

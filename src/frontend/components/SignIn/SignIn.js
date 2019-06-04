@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "./SignIn.scss";
-
-export default class SignIn extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,21 +31,23 @@ export default class SignIn extends Component {
       .then(response => response.json())
       .then(json => {
         console.log("json", json);
-        const message = json.message;
         const error = json.error;
-        this.setState({
-          message,
-          error
-        });
-        if (json.message === "Correct Credentials") {
-          this.props.changeLoged();
+        if (error) {
+          this.setState({
+            error
+          });
+        } else {
+          if (json.admin) {
+            this.props.changeAdmin();
+          }
+          this.props.changeLogged();
           localStorage.setItem("mySessionX", true);
         }
       });
   }
 
   render() {
-    const { message, error, isLogged } = this.state;
+    const { error, isLogged } = this.state;
 
     if (isLogged) {
       return <Redirect to="/" />;
@@ -57,7 +58,6 @@ export default class SignIn extends Component {
           {error ? (
             <h2 className="SignIn__Title">Opps! Wrong email or password!</h2>
           ) : null}
-          {message ? <h2 className="SignIn__Title">{message}</h2> : null}
           <div className="SignIn__Inputs--Container">
             <input
               className="SignIn__Inputs--Container__Item"
@@ -98,3 +98,5 @@ export default class SignIn extends Component {
     }
   }
 }
+
+export default SignIn;

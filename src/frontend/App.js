@@ -20,20 +20,28 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogged: false
+      isLogged: false,
+      isAdmin: false
     };
   }
 
-  changeLoged() {
+  changeLogged() {
     localStorage.clear();
     this.setState({
       isLogged: !this.state.isLogged
     });
   }
 
+  changeAdmin() {
+    this.setState({
+      isAdmin: !this.state.isAdmin
+    });
+    console.log(this.state);
+  }
+
   componentDidMount() {
     let session = localStorage.getItem("mySessionX") || "";
-    if (session) this.changeLoged();
+    if (session) this.changeLogged();
     ReactGA.initialize("UA-138410439-1");
     ReactGA.pageview(window.location.pathname + window.location.search);
     this.props.history.listen((loc, act) => {
@@ -42,24 +50,28 @@ class App extends Component {
   }
 
   render() {
-    const { isLogged } = this.state;
+    const { isLogged, isAdmin } = this.state;
     return (
       <div className="App">
         <HamburgerButton
-          isLogged={this.state.isLogged}
-          changeLoged={this.changeLoged}
+          isLogged={isLogged}
+          isAdmin={isAdmin}
+          changeLogged={this.changeLogged}
+          changeAdmin={this.changeAdmin}
         />
         <Switch>
           <Route exact path="/" component={Gallery} />
-          {isLogged ? (
+          {isLogged && isAdmin ? (
             <Route path="/manage/tv-shows" component={ManageTvShows} />
           ) : null}
           <Route
             path="/sign/in"
             component={() => (
               <SignIn
-                changeLoged={() => this.changeLoged()}
+                changeLogged={() => this.changeLogged()}
+                changeAdmin={() => this.changeAdmin()}
                 isLogged={isLogged}
+                isAdmin={isAdmin}
               />
             )}
           />
