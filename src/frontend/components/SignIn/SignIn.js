@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-import "./SignIn.scss";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link, Redirect } from 'react-router-dom';
+import './SignIn.scss';
 class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      message: "",
-      error: "",
+      email: '',
+      password: '',
+      message: '',
+      error: '',
       isLogged: props.isLogged
     };
   }
@@ -21,16 +22,16 @@ class SignIn extends Component {
   }
 
   handleSignInSubmit() {
-    fetch("/rest/user/sign/in", {
-      method: "POST",
+    fetch('/rest/user/sign/in', {
+      method: 'POST',
       body: JSON.stringify(this.state),
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
     })
       .then(response => response.json())
       .then(json => {
-        console.log("json", json);
+        console.log('json', json);
         const error = json.error;
         if (error) {
           this.setState({
@@ -41,8 +42,11 @@ class SignIn extends Component {
             this.props.changeAdmin();
           }
           this.props.changeLogged();
-          localStorage.setItem("mySessionX", true);
+          localStorage.setItem('mySessionX', true);
         }
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 
@@ -98,5 +102,11 @@ class SignIn extends Component {
     }
   }
 }
+
+SignIn.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+  changeAdmin: PropTypes.func.isRequired,
+  changeLogged: PropTypes.func.isRequired
+};
 
 export default SignIn;

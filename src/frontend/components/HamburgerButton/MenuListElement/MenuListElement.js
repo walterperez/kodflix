@@ -1,8 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "./MenuListElement.scss";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import './MenuListElement.scss';
 
-export default function MenuListElement({
+function MenuListElement({
   text,
   icon,
   route,
@@ -12,7 +13,7 @@ export default function MenuListElement({
   return (
     <Link
       to={`${route}`}
-      style={{ textDecoration: "none" }}
+      style={{ textDecoration: 'none' }}
       onClick={actionCB ? () => actionCB() : () => handleCloseMenuAfterClick()}
     >
       <div className="Menu-item">
@@ -22,3 +23,13 @@ export default function MenuListElement({
     </Link>
   );
 }
+
+MenuListElement.propTypes = {
+  text: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  route: PropTypes.string.isRequired,
+  handleCloseMenuAfterClick: PropTypes.func.isRequired,
+  actionCB: PropTypes.func
+};
+
+export default MenuListElement;

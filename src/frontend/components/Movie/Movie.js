@@ -1,7 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default function Movie(props) {
+function Movie(props) {
   return (
     <Link to={props.id} className="flex-element">
       <img src={`/movies/covers/${props.id}.jpg`} alt={`${props.name} Cover`} />
@@ -11,3 +12,10 @@ export default function Movie(props) {
     </Link>
   );
 }
+
+Movie.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+};
+
+export default Movie;

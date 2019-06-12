@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import "./SignUp.scss";
+import React, { Component } from 'react';
+import './SignUp.scss';
 
 export default class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
-      repeat_password: "",
+      email: '',
+      password: '',
+      repeat_password: '',
       errors: []
     };
   }
@@ -23,13 +23,13 @@ export default class SignUp extends Component {
     const { email, password, repeat_password } = this.state;
     let errors = [];
     if (!email) {
-      errors.push("Email field can not be empty.");
+      errors.push('Email field can not be empty.');
     }
     if (email.length < 6) {
-      errors.push("Email field can not have less than six characters.");
+      errors.push('Email field can not have less than six characters.');
     }
     if (password !== repeat_password) {
-      errors.push("Passwords does not match.");
+      errors.push('Passwords does not match.');
     }
     return errors;
   }
@@ -50,22 +50,25 @@ export default class SignUp extends Component {
       return null;
     } else {
       const { email, password } = this.state;
-      fetch("/rest/user/sign/up", {
-        method: "POST",
+      fetch('/rest/user/sign/up', {
+        method: 'POST',
         body: JSON.stringify({ email, password }),
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         }
       })
         .then(response => response.json())
         .then(json => {
-          console.log("json", json);
+          console.log('json', json);
           const message = json.message;
           const error = json.error;
           this.setState({
             message,
             errors: [error]
           });
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   }

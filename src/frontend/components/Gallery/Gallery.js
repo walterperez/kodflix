@@ -1,24 +1,27 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 //Components
-import Movie from "../Movie/Movie";
-import Loader from "../Loader/Loader";
+import Movie from '../Movie/Movie';
+import Loader from '../Loader/Loader';
 
 export default class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: ""
+      movies: ''
     };
     this.handleMoviesListMapping = this.handleMoviesListMapping.bind(this);
   }
 
   componentDidMount() {
-    fetch("/rest/shows")
+    fetch('/rest/shows')
       .then(response => response.json())
       .then(shows => {
         this.setState({
           movies: shows
         });
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 

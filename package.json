@@ -39,6 +39,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {},
+  "devDependencies": {
+    "prop-types": "^15.7.2"
+  },
   "proxy": "http://localhost:3001"
 }

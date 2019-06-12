@@ -1,15 +1,16 @@
-import React, { Component } from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
-import "./Details.scss";
-import Loader from "./../../components/Loader/Loader";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link, withRouter, Redirect } from 'react-router-dom';
+import './Details.scss';
+import Loader from './../../components/Loader/Loader';
 class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieID: "",
-      movieName: "",
-      movieDescription: "",
-      error: "",
+      movieID: '',
+      movieName: '',
+      movieDescription: '',
+      error: '',
       isLoading: true
     };
   }
@@ -68,5 +69,9 @@ class Details extends Component {
     }
   }
 }
+
+Details.propTypes = {
+  history: PropTypes.object.isRequired
+};
 
 export default withRouter(Details);

@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "./HamburgerButton.scss";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import './HamburgerButton.scss';
 //Components
-import MenuListElement from "./MenuListElement/MenuListElement";
+import MenuListElement from './MenuListElement/MenuListElement';
 //Icons
-import hamburgerButtonIcon from "./../../common/icons/hamburgerIcon.svg";
-import tvIconSVG from "./../../common/icons/cinema.svg";
-import homeIconSVG from "./../../common/icons/icon.svg";
-import LogInSVG from "./../../common/icons/log-in.svg";
-import LogOutSVG from "./../../common/icons/logOut.svg";
+import hamburgerButtonIcon from './../../common/icons/hamburgerIcon.svg';
+import tvIconSVG from './../../common/icons/cinema.svg';
+import homeIconSVG from './../../common/icons/icon.svg';
+import LogInSVG from './../../common/icons/log-in.svg';
+import LogOutSVG from './../../common/icons/logOut.svg';
 
-export default class HamburgerButton extends Component {
+class HamburgerButton extends Component {
   constructor() {
     super();
     this.state = {
       isMenuActive: false,
-      isVisible: "visible"
+      isVisible: 'visible'
     };
     this.handleCloseMenuAfterClick = this.handleCloseMenuAfterClick.bind(this);
   }
@@ -47,7 +47,7 @@ export default class HamburgerButton extends Component {
         {/* List Menu */}
         <div
           onClick={() => this.handleCloseMenuAfterClick()}
-          className={this.state.isMenuActive ? "translucid_backgroud" : null}
+          className={this.state.isMenuActive ? 'translucid_backgroud' : null}
         >
           <div
             className={`Menu-List ${
@@ -91,3 +91,11 @@ export default class HamburgerButton extends Component {
     );
   }
 }
+
+HamburgerButton.propTypes = {
+  isLogged: PropTypes.bool.isRequired,
+  changeLogged: PropTypes.func,
+  isAdmin: PropTypes.bool
+};
+
+export default HamburgerButton;

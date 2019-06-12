@@ -1,7 +1,8 @@
-import React, { Component } from "react";
-import "./Play.scss";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import './Play.scss';
 
-export default class Play extends Component {
+class Play extends Component {
   constructor() {
     super();
     this.state = {};
@@ -14,6 +15,9 @@ export default class Play extends Component {
         this.setState({
           movieUrl: data.movieUrl
         });
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
 
@@ -23,12 +27,13 @@ export default class Play extends Component {
         {this.state.movieUrl ? (
           <div className="Play">
             <iframe
+              title={`${this.state.movieUrl}`}
               className="Video"
               src={`${this.state.movieUrl}`}
               height="100%"
               width="100%"
-              frameborder="0"
-              allowfullscreen
+              frameBorder="0"
+              allowFullScreen
             />
           </div>
         ) : null}
@@ -36,3 +41,9 @@ export default class Play extends Component {
     );
   }
 }
+
+Play.propTypes = {
+  match: PropTypes.object.isRequired
+};
+
+export default Play;
