@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import './Details.scss';
 import Loader from './../../components/Loader/Loader';
-class Details extends Component {
+export class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,32 +16,34 @@ class Details extends Component {
   }
 
   componentDidMount() {
-    let server = `/rest/shows/${this.props.match.params.idMovie}`;
-    fetch(server)
-      .then(response => response.json())
-      .then(movie => {
-        this.setState({
-          movieName: movie.title,
-          movieID: movie.id,
-          movieDescription: movie.synopsis
+    if (this.props.match) {
+      let server = `/rest/shows/${this.props.match.params.idMovie}`;
+      fetch(server)
+        .then(response => response.json())
+        .then(movie => {
+          this.setState({
+            movieName: movie.title,
+            movieID: movie.id,
+            movieDescription: movie.synopsis
+          });
+        })
+        .catch(err => {
+          this.setState(
+            {
+              error: err,
+              isLoading: !this.state.isLoading
+            },
+            () => console.log(this.state)
+          );
+          // this.props.history.push("/NotFound");
         });
-      })
-      .catch(err => {
-        this.setState(
-          {
-            error: err,
-            isLoading: !this.state.isLoading
-          },
-          () => console.log(this.state)
-        );
-        // this.props.history.push("/NotFound");
-      });
+    }
   }
 
   render() {
-    if (this.state.movieName) {
+    if (this.state.movieName && this.props.match.params.idMovie) {
       return (
-        <div className="Details">
+        <div className="Details" data-test="Details">
           <div className="details-container">
             <h1 className="movie-title">{this.state.movieName}</h1>
             <p className="description">{this.state.movieDescription}</p>
@@ -71,7 +73,10 @@ class Details extends Component {
 }
 
 Details.propTypes = {
-  history: PropTypes.object.isRequired
+  // history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
 };
 
-export default withRouter(Details);
+const DetailsWitRouter = withRouter(Details);
+
+export default DetailsWitRouter;
