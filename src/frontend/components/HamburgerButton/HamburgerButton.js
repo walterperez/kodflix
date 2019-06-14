@@ -14,8 +14,7 @@ class HamburgerButton extends Component {
   constructor() {
     super();
     this.state = {
-      isMenuActive: false,
-      isVisible: 'visible'
+      isMenuActive: false
     };
     this.handleCloseMenuAfterClick = this.handleCloseMenuAfterClick.bind(this);
   }
@@ -37,7 +36,11 @@ class HamburgerButton extends Component {
     return (
       <>
         {/* Hamburger Button */}
-        <div className="HamburgerButton" onClick={() => this.handleClick()}>
+        <div
+          className="HamburgerButton"
+          onClick={() => this.handleClick()}
+          data-test="HamburgerButton"
+        >
           <img
             className="HamburgerButton-icon"
             src={hamburgerButtonIcon}
@@ -48,11 +51,13 @@ class HamburgerButton extends Component {
         <div
           onClick={() => this.handleCloseMenuAfterClick()}
           className={this.state.isMenuActive ? 'translucid_backgroud' : null}
+          data-test="TranslucidBackground"
         >
           <div
             className={`Menu-List ${
-              this.state.isMenuActive ? this.state.isVisible : null
+              this.state.isMenuActive ? 'visible' : null
             }`}
+            data-test="MenuList"
           >
             <MenuListElement
               text="Home"
@@ -93,7 +98,7 @@ class HamburgerButton extends Component {
 }
 
 HamburgerButton.propTypes = {
-  isLogged: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool,
   changeLogged: PropTypes.func,
   isAdmin: PropTypes.bool
 };

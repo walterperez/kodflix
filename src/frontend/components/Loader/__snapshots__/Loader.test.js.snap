@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader Render Snapshot 1`] = `
+<div
+  className="flex-container-loader"
+  data-test="Loader"
+>
+  <div
+    className="loader"
+  />
+</div>
+`;

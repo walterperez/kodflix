@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Movie Component No Props No Props Snapshot 1`] = `null`;
+
+exports[`Movie Component With Props Expected props Snapshot 1`] = `
+<a
+  className="flex-element"
+  data-test="Movie"
+  href="/Batman"
+  onClick={[Function]}
+>
+  <img
+    alt="Batman Cover"
+    src="/movies/covers/Batman.jpg"
+  />
+  <div
+    className="box"
+  >
+    <h1>
+      Batman
+    </h1>
+  </div>
+</a>
+`;
