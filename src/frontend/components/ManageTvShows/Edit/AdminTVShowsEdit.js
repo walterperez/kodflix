@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import "./AdminTVShowsEdit.scss";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import './AdminTVShowsEdit.scss';
 
 class AdminTVShowsEdit extends Component {
   constructor() {
     super();
     this.state = {
-      id: "",
-      title: "",
-      description: "",
-      trailer: "",
-      file: "",
-      wallpaper: ""
+      id: '',
+      title: '',
+      description: '',
+      trailer: '',
+      file: '',
+      wallpaper: '',
+      error: ''
     };
   }
 
@@ -41,54 +42,54 @@ class AdminTVShowsEdit extends Component {
     const { title, description, trailer, file, wallpaper } = this.state;
 
     const myBody = new FormData();
-    myBody.append("photo", file);
-    myBody.append("title", title);
-    myBody.append("description", description);
-    myBody.append("trailer", trailer);
+    myBody.append('photo', file);
+    myBody.append('title', title);
+    myBody.append('description', description);
+    myBody.append('trailer', trailer);
 
     const myWallpapper = new FormData();
-    myWallpapper.append("wallpaper", wallpaper);
+    myWallpapper.append('wallpaper', wallpaper);
     fetch(`/rest/shows/edit/photo/${this.state.id}`, {
-      method: "PATCH",
+      method: 'PATCH',
       body: myBody
     })
       .then(response => response.json())
       .then(json => {
         const name = json.id;
-        myWallpapper.append("name", name);
+        myWallpapper.append('name', name);
         if (this.state.wallpaper) {
           fetch(`/rest/shows/edit/wallpaper/${this.state.id}`, {
-            method: "PATCH",
+            method: 'PATCH',
             body: myWallpapper
           })
             .then(response => response.json())
             .then(data => {
               this.setState({
-                id: "",
-                title: "",
-                description: "",
-                trailer: "",
-                file: "",
-                wallpaper: "",
+                id: '',
+                title: '',
+                description: '',
+                trailer: '',
+                file: '',
+                wallpaper: '',
                 message: data.message
               });
               setTimeout(() => {
-                this.props.history.push("/manage/tv-shows/list");
+                this.props.history.push('/manage/tv-shows/list');
               }, 3000);
             })
             .catch(err => console.log(err));
         } else {
           this.setState({
-            id: "",
-            title: "",
-            description: "",
-            trailer: "",
-            file: "",
-            wallpaper: "",
+            id: '',
+            title: '',
+            description: '',
+            trailer: '',
+            file: '',
+            wallpaper: '',
             message: json.message
           });
           setTimeout(() => {
-            this.props.history.push("/manage/tv-shows/list");
+            this.props.history.push('/manage/tv-shows/list');
           }, 2000);
         }
       })

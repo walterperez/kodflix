@@ -1,16 +1,18 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import "./AdminTVShowsAdd.scss";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import './AdminTVShowsAdd.scss';
 
 class AdminTVShowsAdd extends Component {
   constructor() {
     super();
     this.state = {
-      title: "",
-      description: "",
-      trailer: "",
-      file: "",
-      wallpaper: ""
+      title: '',
+      description: '',
+      trailer: '',
+      file: '',
+      wallpaper: '',
+      message: '',
+      error: ''
     };
   }
 
@@ -39,55 +41,76 @@ class AdminTVShowsAdd extends Component {
     e.preventDefault();
     const { title, description, trailer, file, wallpaper } = this.state;
 
+    if (!title || !description || !trailer || !file || !wallpaper) {
+      this.setState({
+        error: "You haven't edited nothing yet!"
+      });
+    }
+
     const myBody = new FormData();
-    myBody.append("photo", file);
-    myBody.append("title", title);
-    myBody.append("description", description);
-    myBody.append("trailer", trailer);
+    myBody.append('photo', file);
+    myBody.append('title', title);
+    myBody.append('description', description);
+    myBody.append('trailer', trailer);
 
     const myWallpapper = new FormData();
-    myWallpapper.append("wallpaper", wallpaper);
+    myWallpapper.append('wallpaper', wallpaper);
 
-    fetch("/rest/shows/add/photo", {
-      method: "POST",
+    fetch('/rest/shows/add/photo', {
+      method: 'POST',
       body: myBody
     })
       .then(response => response.json())
       .then(json => {
-        console.log("My answer before second post: ", json);
+        console.log('My answer before second post: ', json);
         const name = json.id;
-        myWallpapper.append("name", name);
-        fetch("/rest/shows/add/wallpaper", {
-          method: "POST",
+        myWallpapper.append('name', name);
+        fetch('/rest/shows/add/wallpaper', {
+          method: 'POST',
           body: myWallpapper
         })
           .then(response => response.json())
           .then(data => {
             this.setState({
-              title: "",
-              description: "",
-              trailer: "",
-              file: "",
-              wallpaper: "",
+              title: '',
+              description: '',
+              trailer: '',
+              file: '',
+              wallpaper: '',
               message: data.message
             });
             setTimeout(() => {
-              this.props.history.push("/");
+              this.props.history.push('/');
             }, 2000);
           })
-          .catch(err => console.log(err));
+          .catch(err => {
+            this.setState({
+              error: err
+            });
+          });
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        this.setState({
+          error: err
+        });
+      });
   }
 
   render() {
-    let { title, description, trailer, message } = this.state;
+    let { title, description, trailer, message, error } = this.state;
     return (
       <div className="AdminTVShowsAdd">
         {message && (
           <div className="confirmation__message">
             <div className="confirmation__message__box">
               <h3>{message}</h3>
+            </div>
+          </div>
+        )}
+        {error && (
+          <div className="confirmation__error">
+            <div className="confirmation__error__box">
+              <h3>{error}</h3>
             </div>
           </div>
         )}

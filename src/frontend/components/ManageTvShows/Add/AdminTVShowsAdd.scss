@@ -86,4 +86,29 @@
       }
     }
   }
+  .confirmation__error {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(21, 0, 80, 0.301);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .confirmation__error__box {
+      flex: 1;
+      max-width: 300px;
+      max-height: 200px;
+      background-color: rgb(255, 56, 56);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h3 {
+        color: rgb(31, 30, 30);
+        text-align: center;
+      }
+    }
+  }
 }

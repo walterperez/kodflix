@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import getMovieUrl from './utils/getMovieUrl';
 import './Play.scss';
 
 class Play extends Component {
@@ -8,24 +9,33 @@ class Play extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    fetch(`/rest/shows/${this.props.match.params.idMovie}`)
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          movieUrl: data.movieUrl
+  downloadMovieUrl() {
+    const conditionProps =
+      this.props.match !== undefined &&
+      this.props.match.params !== undefined &&
+      typeof this.props.match.params.idMovie === 'string';
+    if (conditionProps) {
+      getMovieUrl(this.props.match.params.idMovie)
+        .then(data => {
+          this.setState({
+            movieUrl: data.data.movieUrl
+          });
+        })
+        .catch(err => {
+          console.log(err);
         });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    }
+  }
+
+  componentDidMount() {
+    this.downloadMovieUrl();
   }
 
   render() {
     return (
       <>
         {this.state.movieUrl ? (
-          <div className="Play">
+          <div className="Play" data-test="Play">
             <iframe
               title={`${this.state.movieUrl}`}
               className="Video"
@@ -43,7 +53,7 @@ class Play extends Component {
 }
 
 Play.propTypes = {
-  match: PropTypes.object.isRequired
+  match: PropTypes.object
 };
 
 export default Play;

@@ -40,6 +40,7 @@ class SignIn extends Component {
         } else {
           if (json.admin) {
             this.props.changeAdmin();
+            localStorage.setItem('mySessionA', true);
           }
           this.props.changeLogged();
           localStorage.setItem('mySessionX', true);

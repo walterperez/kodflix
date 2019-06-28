@@ -1,4 +1,5 @@
 .AdminTVShowsList {
+  min-height: 100vh;
   color: black;
   margin: 0;
   padding: 2em 10%;
@@ -79,7 +80,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vmin;
     background: rgba(21, 0, 80, 0.301);
     display: flex;
     justify-content: center;
