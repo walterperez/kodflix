@@ -31,7 +31,6 @@ class SignIn extends Component {
     })
       .then(response => response.json())
       .then(json => {
-        console.log('json', json);
         const error = json.error;
         if (error) {
           this.setState({
