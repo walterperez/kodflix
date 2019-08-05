@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './App.scss';
+
 //Components
-import Gallery from './components/Gallery/Gallery';
-import Play from './components/Play/Play';
+import MainRoutes from './routes/MainRoutes';
 import HamburgerButton from './components/HamburgerButton/HamburgerButton';
-import ManageTvShows from './components/ManageTvShows/ManageTvShows';
-import SignIn from './components/SignIn/SignIn';
-import SignUp from './components/SignUp/SignUp';
 
 //Redux Types
 import {
@@ -18,13 +16,6 @@ import {
   AUTH_ADMIN_LOGIN,
   AUTH_ADMIN_LOGOUT
 } from './actions/types';
-
-//Routes
-import Details from './routes/Details/Details';
-import NotFound from './routes/NotFound/NotFound';
-
-//Google Analitycs
-import ReactGA from 'react-ga';
 
 class App extends Component {
   static propTypes = {
@@ -37,6 +28,8 @@ class App extends Component {
       isLogged: props.isLogged,
       isAdmin: props.isAdmin
     };
+    this.changeLogged = this.changeLogged.bind(this);
+    this.changeAdmin = this.changeAdmin.bind(this);
   }
 
   changeLogged() {
@@ -94,27 +87,12 @@ class App extends Component {
           changeLogged={this.changeLogged}
           changeAdmin={this.changeAdmin}
         />
-        <Switch>
-          <Route exact path="/" component={Gallery} />
-          {isLogged && isAdmin ? (
-            <Route path="/manage/tv-shows" component={ManageTvShows} />
-          ) : null}
-          <Route
-            path="/sign/in"
-            component={() => (
-              <SignIn
-                changeLogged={() => this.changeLogged()}
-                changeAdmin={() => this.changeAdmin()}
-                isLogged={isLogged}
-                isAdmin={isAdmin}
-              />
-            )}
-          />
-          <Route path="/sign/up" component={SignUp} />
-          <Route exact path="/:idMovie/play" component={Play} />
-          <Route exact path="/:idMovie" component={Details} />
-          <Route component={NotFound} />
-        </Switch>
+        <MainRoutes
+          isLogged={isLogged}
+          isAdmin={isAdmin}
+          changeLogged={this.changeLogged}
+          changeAdmin={this.changeAdmin}
+        />
       </div>
     );
   }
@@ -125,6 +103,9 @@ const mapStateToProps = state => ({
   isAdmin: state.auth.isAdmin
 });
 
-export default withRouter(connect(mapStateToProps)(App));
-
-// export default withRouter(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(App)
+);
