@@ -1,12 +1,14 @@
-const express = require("express");
-const { connect } = require("./db");
-const sessions = require("client-sessions");
+const express = require('express');
+const { connect } = require('./db');
 const app = express();
-const path = require("path");
+const path = require('path');
+const jwt = require('jsonwebtoken');
+const cookieParse = require('cookie-parser');
+const { TOKEN_SECRET } = require('./config/var');
 
 //Import routes
-const showsRoutes = require("./routes/showsRoutes");
-const userRoutes = require("./routes/userRoutes");
+const showsRoutes = require('./routes/showsRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 //Settings
 const port = process.env.PORT || 3001;
@@ -14,36 +16,31 @@ const port = process.env.PORT || 3001;
 //Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(
-  sessions({
-    cookieName: "mySession", // cookie name dictates the key name added to the request object
-    secret: process.env.COOKIE_SECRET, // should be a large unguessable string
-    duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
-    activeDuration: 1000 * 60 * 5, // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
-    cookie: {
-      path: "/", // cookie will only be sent to requests under '/api'
-      maxAge: 60000, // duration of the cookie in milliseconds, defaults to duration above
-      ephemeral: false, // when true, cookie expires when the browser closes
-      httpOnly: true, // when true, cookie is not accessible from javascript
-      secure: false // when true, cookie will only be sent over SSL. use key 'secureProxy' instead if you handle SSL not in your node process
-    }
-  })
-);
+app.use(cookieParse());
+app.use((req, _, next) => {
+  try {
+    const accessToken = req.cookies['access-token'];
+    const data = jwt.verify(accessToken, TOKEN_SECRET);
+    req.userId = data.userId;
+  } catch (e) {}
+  next();
+});
 
 // Static;
-app.use(express.static(path.join(__dirname, "./../../build")));
-app.use("/movies", express.static(path.join(__dirname, "./../../movies")));
+app.use(express.static(path.join(__dirname, './../../build')));
+app.use('/movies', express.static(path.join(__dirname, './../../movies')));
 
 connect().then(db => {
   //Routes
-  app.use("/rest/shows", showsRoutes);
-  app.use("/rest/user", userRoutes);
+  app.use('/rest/shows', showsRoutes);
+  app.use('/rest/user', userRoutes);
 
   // @route   GET /
   // @desc    Send index.html
   // @access  Public
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "./../../build/", "index.html"));
+  app.get('/', (req, res) => {
+    console.log('req', req.cookies);
+    res.sendFile(path.join(__dirname, './../../build/', 'index.html'));
   });
 
   //Server Run
